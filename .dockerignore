@@ -1,0 +1,6 @@
+.git
+.github
+target
+README.md
+k8s
+docker-compose.yml
