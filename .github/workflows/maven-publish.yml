@@ -26,3 +26,13 @@ jobs:
 
       - name: Build with Maven
         run: ./mvnw clean package
+
+      - name: Sonarqube analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          ./mvnw verify \
+          org.sonarsource.scanner.maven:sonar-maven-plugin:5.7.0.6970:sonar \
+          -Dsonar.projectKey=spring-petclinic
+  
