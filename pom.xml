@@ -17,6 +17,7 @@
   <properties>
     <!-- Generic properties -->
     <java.version>17</java.version>
+    <postgresql.version>42.7.12</postgresql.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- Important for reproducible builds. Update using e.g. ./mvnw versions:set -DnewVersion=... -->
