@@ -35,4 +35,11 @@ jobs:
           ./mvnw verify \
           org.sonarsource.scanner.maven:sonar-maven-plugin:5.7.0.6970:sonar \
           -Dsonar.projectKey=spring-petclinic
-  
+          
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: '1'
