@@ -43,3 +43,6 @@ jobs:
           scan-ref: .
           severity: HIGH,CRITICAL
           exit-code: '1'
+
+      - name: Docker image build
+        run: docker build -t petclinic:${{ github.sha }} .
