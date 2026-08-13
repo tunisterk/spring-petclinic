@@ -46,3 +46,12 @@ jobs:
 
       - name: Docker image build
         run: docker build -t petclinic:${{ github.sha }} .
+
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action
+        with:
+          image-ref: petclinic:${{ github.sha }}
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+          ignore-unfixed: true
+
