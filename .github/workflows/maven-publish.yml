@@ -48,7 +48,7 @@ jobs:
         run: docker build -t petclinic:${{ github.sha }} .
 
       - name: Trivy image scan
-        uses: aquasecurity/trivy-action
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: petclinic:${{ github.sha }}
           severity: HIGH,CRITICAL
