@@ -44,7 +44,7 @@ jobs:
           severity: HIGH,CRITICAL
           exit-code: '1'
 
-      - name: Docker image build
+      - name: Build petclinic docker image
         run: docker build -t petclinic:${{ github.sha }} .
 
       - name: Trivy image scan
