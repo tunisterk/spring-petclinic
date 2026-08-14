@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: petclinic-config
+data:
+  SPRING_PROFILES_ACTIVE: postgres
+  POSTGRES_URL: jdbc:postgresql://demo-db:5432/petclinic

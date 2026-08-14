@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: petclinic
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 80
       targetPort: 8080
@@ -30,32 +30,61 @@ spec:
     spec:
       containers:
         - name: workload
-          image: dsyer/petclinic
+          image: ghcr.io/tunisterk/spring-petclinic:ef9f5bf65e992961fba5ca5d98a59f0c76be7938
+
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-config
+                  key: SPRING_PROFILES_ACTIVE
+
+            - name: POSTGRES_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: petclinic-config
+                  key: POSTGRES_URL
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: demo-db
+                  key: username
+
+            - name: POSTGRES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: demo-db
+                  key: password
+
             - name: SERVICE_BINDING_ROOT
               value: /bindings
+
             - name: SPRING_APPLICATION_JSON
               value: |
                 {
                   "management.endpoint.health.probes.add-additional-paths": true
                 }
+
           ports:
             - name: http
               containerPort: 8080
+
           livenessProbe:
             httpGet:
               path: /livez
               port: http
+
           readinessProbe:
             httpGet:
               path: /readyz
               port: http
+
           volumeMounts:
             - mountPath: /bindings/secret
               name: binding
               readOnly: true
+
       volumes:
         - name: binding
           projected:
