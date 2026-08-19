@@ -1,0 +1,49 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/tunisterk/spring-petclinic
+  tag: "ef9f5bf65e992961fba5ca5d98a59f0c76be7938"
+  pullPolicy: IfNotPresent
+
+petclinic:
+  containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+
+configMap:
+  name: petclinic-config
+  springProfile: postgres
+  postgresUrl: jdbc:postgresql://demo-db:5432/petclinic
+
+secret:
+  name: demo-db
+  username: user
+  password: pass
+
+database:
+  name: petclinic
+  image:
+    repository: postgres
+    tag: "18"
+    pullPolicy: IfNotPresent
+
+  service:
+    name: demo-db
+    type: ClusterIP
+    port: 5432
+
+probes:
+  liveness:
+    path: /livez
+  readiness:
+    path: /readyz
+
+ingress:
+  enabled: true
+  className: alb
+  scheme: internet-facing
+  targetType: ip
+  path: /
+  pathType: Prefix

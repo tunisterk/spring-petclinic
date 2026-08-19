@@ -1,0 +1,11 @@
+apiVersion: v2
+
+name: petclinic
+
+description: Helm chart for Spring PetClinic on Kubernetes
+
+type: application
+
+version: 0.1.0
+
+appVersion: "4.0.0"

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: {{ .Values.configMap.name }}
+
+data:
+  SPRING_PROFILES_ACTIVE: {{ .Values.configMap.springProfile | quote }}
+
+  POSTGRES_URL: {{ .Values.configMap.postgresUrl | quote }}
