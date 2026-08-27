@@ -40,9 +40,7 @@ spec:
     spec:
       containers:
         - name: postgres
-
           image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}"
-
           imagePullPolicy: {{ .Values.database.image.pullPolicy }}
 
           ports:
@@ -63,3 +61,20 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secret.name }}
                   key: password
+
+          resources:
+            requests:
+              cpu: {{ .Values.database.resources.requests.cpu | quote }}
+              memory: {{ .Values.database.resources.requests.memory | quote }}
+            limits:
+              cpu: {{ .Values.database.resources.limits.cpu | quote }}
+              memory: {{ .Values.database.resources.limits.memory | quote }}
+
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: demo-db-pvc

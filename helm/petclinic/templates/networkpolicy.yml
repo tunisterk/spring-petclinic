@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+
+metadata:
+  name: demo-db
+
+spec:
+  podSelector:
+    matchLabels:
+      app: demo-db
+
+  policyTypes:
+    - Ingress
+
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: petclinic
+
+      ports:
+        - protocol: TCP
+          port: 5432
