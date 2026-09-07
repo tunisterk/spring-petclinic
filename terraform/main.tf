@@ -1,3 +1,4 @@
+
 module "network" {
   source = "./modules/network"
 
@@ -31,6 +32,4 @@ module "eks_addons_iam" {
   source = "./modules/eks-addons-iam"
 
   oidc_issuer_url = module.eks.oidc_issuer_url
-
-  alb_controller_policy_arn = "arn:aws:iam::209211398203:policy/AWSLoadBalancerControllerIAMPolicy"
 }

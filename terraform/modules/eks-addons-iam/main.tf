@@ -40,7 +40,14 @@ resource "aws_iam_role" "alb_controller" {
   assume_role_policy = data.aws_iam_policy_document.alb_controller_assume_role.json
 }
 
+resource "aws_iam_policy" "alb_controller" {
+  name        = "AWSLoadBalancerControllerIAMPolicy"
+  description = "IAM policy for AWS Load Balancer Controller"
+
+  policy = file("${path.module}/iam_policy.json")
+}
+
 resource "aws_iam_role_policy_attachment" "alb_controller" {
   role       = aws_iam_role.alb_controller.name
-  policy_arn = var.alb_controller_policy_arn
+  policy_arn = aws_iam_policy.alb_controller.arn
 }
