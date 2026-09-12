@@ -13,6 +13,5 @@ output "node_role_arn" {
     aws_iam_role_policy_attachment.eks_worker_node_policy,
     aws_iam_role_policy_attachment.eks_cni_policy,
     aws_iam_role_policy_attachment.eks_container_registry_policy,
-    aws_iam_role_policy_attachment.eks_ebs_csi_policy
   ]
 }

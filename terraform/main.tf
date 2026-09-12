@@ -32,4 +32,5 @@ module "eks_addons_iam" {
   source = "./modules/eks-addons-iam"
 
   oidc_issuer_url = module.eks.oidc_issuer_url
+  cluster_name    = module.eks.cluster_name
 }
