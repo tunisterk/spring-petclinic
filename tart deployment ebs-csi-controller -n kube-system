@@ -1,0 +1,29 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "AmazonEKS_EBS_CSI_DriverRole",
+        "RoleId": "AROA26R67DAVEC3CB6TTG",
+        "Arn": "arn:aws:iam::752825079850:role/AmazonEKS_EBS_CSI_DriverRole",
+        "CreateDate": "2026-09-07T03:09:50+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "pods.eks.amazonaws.com"
+                    },
+                    "Action": [
+                        "sts:AssumeRole",
+                        "sts:TagSession"
+                    ]
+                }
+            ]
+        },
+        "MaxSessionDuration": 3600,
+        "RoleLastUsed": {
+            "LastUsedDate": "2026-09-07T03:14:11+00:00",
+            "Region": "eu-central-1"
+        }
+    }
+}
